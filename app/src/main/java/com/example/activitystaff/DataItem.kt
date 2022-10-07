@@ -15,5 +15,4 @@ class DataItem : Serializable {
 
     @field:SerializedName("staff_alamat")
     val staffAlamat: String? = null
-
 }
