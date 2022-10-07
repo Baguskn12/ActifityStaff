@@ -1,5 +1,6 @@
 package com.example.activitystaff
 
+import android.util.Log
 import retrofit2.Call
 import retrofit2.Response
 
@@ -7,13 +8,13 @@ class Presenter(val crudView: MainActivity) {
     //fungsi get data
     fun getData() {
         NetworkConfig.getService().getData()
-            .enqueue(object : retrofit2.Callback<ResultStatus> {
-                override fun onFailure(call: Call<ResultStatus>, t: Throwable) {
+            .enqueue(object : retrofit2.Callback<ResultStaff> {
+                override fun onFailure(call: Call<ResultStaff>, t: Throwable) {
                     crudView.onFailedGet(t.localizedMessage)
-                    log.d("Error", "Error Data")
+                    Log.d("Error", "Error Data")
                 }
 
-                override fun onResponse(call: Call<ResultStatus>, response: Response<ResultStatus>) {
+                override fun onResponse(call: Call<ResultStaff>, response: Response<ResultStaff>) {
                     if (response.isSuccessful) {
                         val status = response.body()?.status
                         if (status == 200) {

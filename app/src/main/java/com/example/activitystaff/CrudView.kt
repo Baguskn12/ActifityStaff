@@ -6,14 +6,14 @@ interface CrudView {
     fun onFailedGet(msg : String)
 
     //untuk add
-    fun onSuccessGet(msg: String)
-    fun errorAdd(msg : String)
+    fun onSuccessAdd(msg: String)
+    fun onErrorAdd(msg : String)
 
     //untuk update
     fun onSuccessUpdate(msg: String)
-    fun errorUpdate(msg : String)
+    fun onErrorUpdate(msg : String)
 
     //untuk delete
     fun onSuccessDelete(msg: String)
-    fun errorDelete(msg : String)
+    fun onErrorDelete(msg : String)
 }

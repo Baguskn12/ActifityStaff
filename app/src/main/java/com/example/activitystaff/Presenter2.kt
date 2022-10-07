@@ -1,5 +1,6 @@
 package com.example.activitystaff
 
+import android.util.Log
 import retrofit2.Call
 import retrofit2.Response
 
@@ -10,15 +11,15 @@ class Presenter2 (val crudView: UpdateAddActivity) {
             .addStaff(name, hp, alamat)
             .enqueue(object : retrofit2.Callback<ResultStatus> {
                 override fun onFailure(call: Call<ResultStatus>, t: Throwable) {
-                    crudView.errorAdd(t.localizedMessage)
+                    crudView.onErrorAdd(t.localizedMessage)
                 }
 
                 override fun onResponse(call: Call<ResultStatus>, response: Response<ResultStatus>
                 ) {
                     if (response.isSuccessful && response.body()?.status == 200) {
-                        crudView.successAdd(response.body()?.pesan ?: "")
+                        crudView.onSuccessAdd(response.body()?.pesan ?: "")
                     } else {
-                        crudView.errorAdd(response.body()?.pesan ?: "")
+                        crudView.onErrorAdd(response.body()?.pesan ?: "")
                     }
                 }
             })
@@ -28,7 +29,7 @@ class Presenter2 (val crudView: UpdateAddActivity) {
     fun updateData(id: String, name: String, hp: String, alamat: String) {
         NetworkConfig.getService()
             .updateStaff(id, name, hp, alamat)
-            .enqueue(object : retrofit2.Callback<ResultStatus>, {
+            .enqueue(object : retrofit2.Callback<ResultStatus> {
                 override fun onFailure(call: Call<ResultStatus>, t: Throwable) {
                     crudView.onErrorUpdate(t.localizedMessage)
                 }
